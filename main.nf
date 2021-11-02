@@ -17,7 +17,7 @@ process adapterTrim {
 
     shell:
     '''
-    seqkit stats *_R1_*.fastq.gz -T -j 64 > input_stats.txt
+    seqkit stats !{fastq_F} -T -j 64 > input_stats.txt
     F=`basename !{fastq_F} _R1_001.fastq.gz`
     fastp -w 32 -q 30 -i "$F"_R1_001.fastq.gz -I "$F"_R2_001.fastq.gz -o "$F"_R1.qc.fastq.gz -O "$F"_R2.qc.fastq.gz \
 		-h fastp_report.html
